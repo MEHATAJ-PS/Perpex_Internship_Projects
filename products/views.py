@@ -64,7 +64,7 @@ class MenuAPIView(APIView):
             {
 
                 "name": "Margherita Pizza",
-                "description": "Classic pizza with tomata sauce and mozzarella cheese.",
+                "description": "Classic pizza with tomato sauce and mozzarella cheese.",
                 "price": 299.00
 
             },
@@ -84,3 +84,4 @@ class MenuAPIView(APIView):
             }
         ]
         return Response(menu_data, status=status.HTTP_200_OK)
+
