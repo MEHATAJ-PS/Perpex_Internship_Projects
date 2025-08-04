@@ -7,17 +7,24 @@ from .models import Item
 from .serializers import ItemSerializer
 
 
-#-----------------------------
-# Dynamic Menu (from database)
-#-----------------------------
+
 class ItemView(APIView):
+    """
+    API endpoint to retrieve and create items stored in the database.
+    """
 
     def get(self, request):
+        """
+        Handle GET requests to return all items from the database.
+        """
         items = Item.objects.all()
         serializer = ItemSerializer(items, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        """
+        Handle POST requests to create a new item.
+        """
         serializer = ItemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -25,12 +32,16 @@ class ItemView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#-------------------------
-# Static Menu (hardcoded)
-#-------------------------
+
 class MenuAPIView(APIView):
-    def get(self.request):
-        menu = [
+    """
+    API endpoint to retrieve the restaurant's hardcode menu.
+    """
+    def get(self, request):
+        """
+        Return a static list of dishes wiyh name, description, and price.
+        """
+        menu_data = [
             {
                 "name": "Veg Biryani",
                 "description": "Spicy rice with vegetables",
@@ -45,6 +56,21 @@ class MenuAPIView(APIView):
                 "name": "Paneer Tikka",
                 "description": "Grilled cottage cheese cubes",
                 "price": 150.00
+            },
+            {
+                "name": "Margherita Pizza",
+                "description": "Classic pizza with tomata sauce and mozzarella cheese.",
+                "price": 299.00
+            },
+            {
+                "name": "Pasta Alfredo",
+                "description": "Creamy pasta with rich Alfredo sauce and mushrooms.",
+                "price": 349.00
+            },
+            {
+                "name": "Caesar Salad",
+                "description": "Fresh romaine lettuce with Caesar dressing and croutons.",
+                "price": 199.00
             }
         ]
         return Response(menu, status=status.HTTP_200_OK)
