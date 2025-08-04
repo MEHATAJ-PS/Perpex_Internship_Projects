@@ -84,4 +84,3 @@ class MenuAPIView(APIView):
             }
         ]
         return Response(menu_data, status=status.HTTP_200_OK)
-
