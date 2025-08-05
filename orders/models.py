@@ -1,3 +1,3 @@
 from django.db import models
-
-# Create your models here.
+from django.contribe.auth.models import User
+from products.models import Pro
