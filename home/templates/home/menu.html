@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Restaurant Menu</title>
+    </head>
+    <body>
+        <h1>Our Menu</h1>
+        <ul>
+            {% for item in menu %}
+                <li>
+                    <strong>{{item.name}}</strong><br>
+                    {{item.description}}<br>
+                    <em>&#8377;{{item.price}}</em>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
