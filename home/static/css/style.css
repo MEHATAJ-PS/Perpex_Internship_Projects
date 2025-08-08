@@ -1,0 +1,46 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff8f0;
+}
+
+.navbar {
+    background-color: #8b0000 !important;
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+}
+
+.nav-link:hover {
+    color: #ffcc00 !important;
+}
+
+.hero {
+    background: url('https://images.unsplash.com/photo-1555992336-03a23c4a2c02') center/cover no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.menu-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.price {
+    font-weight: bold;
+    color: #28a745;
+    font-size: 1.1rem;
+}
+
+.location-section iframe {
+    border-radius: 10px;
+}
