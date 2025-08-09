@@ -14,5 +14,9 @@ def menu_view(request):
     return render(request, 'home/menu.html', {'menu': menu_items})
 
 
+
 def custom_404_view(request, exception):
     return render(request, 'home/404.html', status=404)
+
+def homepage(request):
+    return render(request, 'home/index.html')
