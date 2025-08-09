@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            margin:0;
+            font-family: Arial, sans-serif;
+            background-color:#f4f6f8;
+            color:#333;
+        }
+        header {
+            background-color:#2c3e50;
+            color:white;
+            padding:15px 5%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+        nav a {
+            color:white;
+            text-decoration:none;
+            margin:0 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            text-align:center;
+            padding:60px 20px;
+            background;linear-gradient(to right, #3498db, #2ecc71);
+            color:white;
+        }
+        .hero h2 {
+            font-size:2.5rem;
+            margin-bottom:15px;
+        }
+        .hero p {
+            max-width:600px;
+            margin:auto;
+            font-size:1.1rem;
+            line-height:1.6;
+        }
+        .btn {
+            display:inline:inline-block;
+            margin-top:25px;
+            padding:12px 30px;
+            background:white;
+            color:#2c3e50;
+            font-weiht:bold;
+            border-radius:25px;
+            text-decoration:none;
+        }
+        section {
+        padding:40px 10%;
+        text-align:center;
+        }
+        footer {
+            background-color:#2c3e50;
+            color:white;
+            text-align:center;
+            padding:15pxx;
+            margin-top:30px;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                margin: 10px;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            } 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Website</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Menu</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to My Restaurant</h2>
+        <p>Delicious food, cozy atmosphere, and great service - all in one place.</p>
+        <a href="#" class="btn">View Menu</a>
+    </section>
+
+    <section>
+        <h3>Our Specialties</h3>
+        <p>we serve the best dishes prepared with fresh ingredients and love.</p>
+    </section>
+
+    <footer>
+        &copy; 2025 My REstaurant. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
