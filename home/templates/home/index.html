@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homepage</title>
+    <title>My Restaurant - Homepage</title>
     <style>
         /* General Page Styling */
         body {
@@ -28,10 +28,12 @@
             color: white;
             text-decoration: none;
             margin: 0 10px;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
             text-decoration: underline;
+            color: #ecf0f1;
         }
 
         /* Hero Section */
@@ -63,6 +65,13 @@
             font-weight: bold;
             border-radius: 25px;
             text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #ecf0f1;
+            color: #2c3e50;
         }
 
         /* Content Section */
@@ -111,7 +120,7 @@
     <!-- Navbar -->
     <header>
         <h1>My Website</h1>
-        <nav>
+        <nav aria-label="Main Navigation">
             <a href="#">Home</a>
             <a href="#">Menu</a>
             <a href="#">About</a>
@@ -119,18 +128,19 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2>Welcome to My Restaurant</h2>
-        <p>Delicious food, cozy atmosphere, and great service - all in one place.</p>
-        <a href="#" class="btn">View Menu</a>
-    </section>
-
-    <!-- content Section -->
-    <section>
-        <h3>Our Specialties</h3>
-        <p>we serve the best dishes prepared with fresh ingredients and love.</p>
-    </section>
+    <main role="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Welcome to My Restaurant</h2>
+            <p>Delicious food, cozy atmosphere, and great service - all in one place.</p>
+            <a href="#" class="btn">View Menu</a>
+        </section>
+        <!-- content Section -->
+        <section>
+            <h3>Our Specialties</h3>
+            <p>We serve the best dishes prepared with fresh ingredients and love.</p>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
