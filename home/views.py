@@ -24,3 +24,8 @@ def homepage(request):
     restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
 
     return render(request, 'home/index.html', {'restaurant_name': restaurant_name})
+
+def about_view(request):
+    restaurant_info = RestaurantInfo.objects.first()
+    restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
+    return render(request, 'home/about.html', {'restaurant_name': restaurant_name})
