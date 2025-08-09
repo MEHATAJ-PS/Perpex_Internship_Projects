@@ -1,5 +1,6 @@
 import requests
 from django.shortcuts import render
+from .models import RestaurantInfo
 
 def menu_view(request):
     
@@ -19,4 +20,7 @@ def custom_404_view(request, exception):
     return render(request, 'home/404.html', status=404)
 
 def homepage(request):
-    return render(request, 'home/index.html', context)
+    restaurant_info = RestaurantInfo.objects.first()
+    restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
+
+    return render(request, 'home/index.html', {'restaurant_name': restaurant_name})
