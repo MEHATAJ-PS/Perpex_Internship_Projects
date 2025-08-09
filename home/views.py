@@ -19,4 +19,4 @@ def custom_404_view(request, exception):
     return render(request, 'home/404.html', status=404)
 
 def homepage(request):
-    return render(request, 'home/index.html')
+    return render(request, 'home/index.html', context)
