@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Restaurant - Homepage</title>
+    <title>{{ restaurant_name }} - Homepage</title>
     <style>
         /* General Page Styling */
         body {
@@ -119,7 +119,7 @@
 
     <!-- Navbar -->
     <header>
-        <h1>My Website</h1>
+        <h1>{{ restaurant_name }}</h1>
         <nav aria-label="Main Navigation">
             <a href="#">Home</a>
             <a href="#">Menu</a>
@@ -131,7 +131,7 @@
     <main role="main">
         <!-- Hero Section -->
         <section class="hero">
-            <h2>Welcome to My Restaurant</h2>
+            <h2>Welcome to {{ restaurant_name }}</h2>
             <p>Delicious food, cozy atmosphere, and great service - all in one place.</p>
             <a href="#" class="btn">View Menu</a>
         </section>
@@ -144,7 +144,7 @@
 
     <!-- Footer -->
     <footer>
-        &copy; 2025 My Restaurant. All Rights Reserved.
+        &copy; 2025 {{ restaurant_name }}. All Rights Reserved.
     </footer>
 
 </body>
