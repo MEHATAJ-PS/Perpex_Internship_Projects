@@ -31,3 +31,28 @@ def about_view(request):
     restaurant_info = RestaurantInfo.objects.first()
     restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
     return render(request, 'home/about.html', {'restaurant_name': restaurant_name})
+
+def contact_view(request):
+    """
+    Render a simple Contact Us page with hardcoded info.
+    """
+    contact_info = {
+        "phone"; "+1 (555) 123-4567",
+        "email": "info@myrestaurant.com",
+        "address": "123 Food Street, Flavor Town, USA",
+        "hours": "Mon-Sat: 10am - 10pm, Sun: Closed"
+    }
+
+    restaurant_info = None
+    try:
+        from .models import RestaurantInfo
+        restaurant_info = RestaurantInfo.objects.first()
+    except ImportError:
+        pass
+
+    restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
+
+    return render(request, "home/contact.html", {
+        "contact": contact_info,
+        "restaurant_name": restaurant_name,
+    })
