@@ -1,6 +1,7 @@
 import requests
 from django.shortcuts import render
 from .models import RestaurantInfo
+from django.conf import settings
 
 def menu_view(request):
     
@@ -24,8 +25,12 @@ def custom_404_view(request, exception):
 def homepage(request):
     restaurant_info = RestaurantInfo.objects.first()
     restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
+    phone_number = getattr(settings, "RESTAURANT_PHONE_NUMBER", "N/A")
 
-    return render(request, 'home/index.html', {'restaurant_name': restaurant_name})
+    return render(request, 'home/index.html', {
+        'restaurant_name': restaurant_name,
+        'phone_number': phone_number,
+    })
 
 def about_view(request):
     restaurant_info = RestaurantInfo.objects.first()
