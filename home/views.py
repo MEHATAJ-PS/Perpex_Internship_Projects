@@ -8,8 +8,10 @@ def menu_view(request):
 
     try:
         response = requests.get(api_url)
+        response.raise_for_status()
         menu_items = response.json()
-    except requests.exceptions.RequestException:
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching menu items: {e}")
         menu_items = [] 
     
     return render(request, 'home/menu.html', {'menu': menu_items})
