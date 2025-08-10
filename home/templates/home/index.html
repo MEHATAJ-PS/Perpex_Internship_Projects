@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/styles.css' %}">
     <title>{{ restaurant_name }} - Homepage</title>
     <style>
         /* General Page Styling */
@@ -121,10 +123,10 @@
     <header>
         <h1>{{ restaurant_name }}</h1>
         <nav aria-label="Main Navigation">
-            <a href="#">Home</a>
-            <a href="#">Menu</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="{% url 'homepage' %}">Home</a>
+            <a href="{% url 'menu' %}">Menu</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
         </nav>
     </header>
 
