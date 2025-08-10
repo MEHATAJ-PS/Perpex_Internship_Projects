@@ -37,7 +37,7 @@ class MenuAPIView(APIView):
     """
     def get(self, request):
         """
-        Return a static list of dishes wiyh name, description, and price.
+        Return a static list of dishes with name, description, and price.
         """
         menu_data = [
             {
