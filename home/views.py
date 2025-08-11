@@ -2,6 +2,7 @@ import requests
 from django.shortcuts import render
 from .models import RestaurantInfo
 from django.conf import settings
+from django.utils import timezone
 
 def menu_view(request):
     
@@ -75,4 +76,5 @@ def reservations_view(request):
         'restaurant_name': restaurant_name,
         'phone_number': phone_number,
         'contact_email': contact_email,
+        'now': timezone.now(),
     })
