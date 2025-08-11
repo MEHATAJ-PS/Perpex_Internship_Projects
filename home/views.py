@@ -61,3 +61,18 @@ def contact_view(request):
         "contact": contact_info,
         "restaurant_name": restaurant_name,
     })
+
+def reservations_view(request):
+    """
+    Render Reservations placeholder page.
+    """
+    restaurant_info = RestaurantInfo.objects.first()
+    restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
+    phone_number = getattr(settings, "RESTAURANT_PHONE_NUMBER", "N/A")
+    contact_email = getattr(settings, "RESTAURANT_CONTACT_EMAIL", None)
+
+    return render(request, 'home/reservations.html', {
+        'restaurant_name': restaurant_name,
+        'phone_number': phone_number,
+        'contact_email': contact_email,
+    })
