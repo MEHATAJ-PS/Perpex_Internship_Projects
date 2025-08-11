@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reservations - {{ restaurant_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1>{{ restaurant_name }}</h1>
+    <nav aria-label="Main Navigation">
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'reservations' %}">Reservations</a>
+    </nav>
+</header>
+
+<main role="main">
+    <section class="hero">
+        <h2>Reservations</h2>
+        <p>Our online reservation system is coming soon.</p>
+        <p>For now please call us to reserve a table: <strong>{{ phone_number }}</strong></p>
+        <p class="muted">We'll add an online booking from here shortly.</p>
+    </section>
+
+    <section>
+        <h3>Need Help?</h3>
+        <p>If you have questions about booking or group reservations, contact us at <a href="mailto:{{ contact_email|default:'' }}">{{ contact_email }}</a></p>
+    </section>
+</main>
+
+<footer>
+    &copy; {{ now|date:"Y" }} {{ restaurant_name }}. All Rights Reserved.
+</footer>
+</body>
+</html>
