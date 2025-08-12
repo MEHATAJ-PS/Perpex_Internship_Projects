@@ -1,21 +1,17 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db import DatabaseError
 from .models import Item
 from .serializers import ItemSerializer
-from django.db import DatabaseError
 
 
 
 class ItemView(APIView):
-    """
-    API endpoint to retrieve and create items stored in the database.
-    """
-
+    """API endpoint to retrieve and create items stored in the database."""
+    
     def get(self, request):
-        """
-        Handle GET requests to return all items from the database.
-        """
+        
         try:
             items = Item.objects.all()
             serializer = ItemSerializer(items, many=True)
@@ -25,16 +21,10 @@ class ItemView(APIView):
                 {"error": "Database error occurred while fetching items."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        except Exception as e:
-            return Response(
-                {"error": f"Unexpected error: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
+        
 
     def post(self, request):
-        """
-        Handle POST requests to create a new item.
-        """
+        
         try:
             serializer = ItemSerializer(data=request.data)
             if serializer.is_valid():
@@ -46,23 +36,16 @@ class ItemView(APIView):
                 {"error": "Database error occurred while saving the item."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        except Exception as e:
-            return Response(
-                {"error": f"Unexpected error: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
-
+       
 
 
 class MenuAPIView(APIView):
-    """
-    API endpoint to retrieve the restaurant's hardcode menu.
-    """
+    """API endpoint to retrieve the restaurant's hardcode menu."""
+    
     def get(self, request):
-        """
-        Return a static list of dishes with name, description, and price.
-        """
+        
         try:
+            # TODO: Move hardcoded menu to database or config file for maintainability.
             menu_data = [
                 {
                     "name": "Veg Biryani",
@@ -97,7 +80,8 @@ class MenuAPIView(APIView):
             ]
             return Response(menu_data, status=status.HTTP_200_OK)
         except Exception as e:
+            # Broad exception caught only here as last resort
             return Response(
-                {"error": f"Unexpected error: {str(e)}"},
+                {"error": f"Unexpected error occurred: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
