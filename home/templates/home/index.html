@@ -11,7 +11,14 @@
 
     <!-- Navbar -->
     <header>
-        <h1>{{ restaurant_name }}</h1>
+        <!-- Restaurant Logo and Name -->
+        <div class="header-content">
+            <img src="https://cdn-icons-png.flaticon.com/512/685/685352.png"
+                 alt="Restaurant Logo"
+                 class="logo-img">
+            <h1>{{ restaurant_name }}</h1>
+        </div>
+
         <nav aria-label="Main Navigation">
             <a href="{% url 'homepage' %}" aria-label="Go to Home page">Home</a>
             <a href="{% url 'menu' %}" aria-label="View Menu">Menu</a>
