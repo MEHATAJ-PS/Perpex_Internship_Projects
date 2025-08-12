@@ -103,3 +103,34 @@ body {
 .section {
     padding: 60px 0;
 }
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.logo-img {
+    max-width: 80px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        max-width: 60px;
+        margin-right: 10px;
+    }
+
+    .header-content {
+        flex-direction: column;
+    }
+}
