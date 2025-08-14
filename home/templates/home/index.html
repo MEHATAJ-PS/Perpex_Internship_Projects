@@ -35,6 +35,15 @@
             <p>Call us at: <strong>{{ phone_number }}</strong></p>
             <a href="{% url 'menu' %}" class="btn-custom">View Menu</a>
         </section>
+
+
+        <!-- Search Bar Section -->
+        <section class="search-bar">
+            <form method="get" action="#">
+                <input type="text" name="q" placeholder="Search menu items..." aria-label="Search Menu Items">
+                <button type="submit">Search</button>
+            </form>
+        </section>
         
         <!-- content Section -->
         <section>
