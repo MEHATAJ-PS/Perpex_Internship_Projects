@@ -14,14 +14,23 @@ def menu_view(request):
         menu_items = response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error fetching menu items: {e}")
-        menu_items = [] 
-    
-    return render(request, 'home/menu.html', {'menu': menu_items})
+        menu_items = []
 
+    restaurant_info = RestaurantInfo.objects.first()
+    restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant" 
+    
+    return render(request, 'home/menu.html', {
+        'menu': menu_items,
+        'restaurant_name': restaurant_name
+    })
 
 
 def custom_404_view(request, exception):
-    return render(request, 'home/404.html', status=404)
+    restaurant_info = RestaurantInfo.objects.first()
+    restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
+    return render(request, 'home/404.html', {
+        'restaurant_name': restaurant_name
+    }, status=404)
 
 def homepage(request):
     restaurant_info = RestaurantInfo.objects.first()
