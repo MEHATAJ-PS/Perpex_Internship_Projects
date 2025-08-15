@@ -6,11 +6,11 @@ class feedbackForm(forms.ModelForm):
     """
     Form for users to submit feedback.
     """
-    class meta:
+    class Meta:
         model = Feedback
-        fields = ['name', 'email', 'message']
+        fields = ['name', 'email', 'comments']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
-            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Feedback', 'rows': 5}),
+            'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Feedback', 'rows': 5}),
         }
