@@ -107,16 +107,16 @@ def feedback_view(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
         email = request.POST.get("email", "").strip()
-        message= request.POST.get("message", "").strip()
+        comments = request.POST.get("message", "").strip()
 
-        if name and email and message:
-            Feedback.objects.create(name=name, email=email, message=message)
+        if name and email and comments:
+            Feedback.objects.create(name=name, email=email, comments=comments)
             messages.success(request, "Thank you! Your feedback has been submitted.")
             return redirect("feedback") # Redirect to avoid form resubmission
         else:
             messages.error(request, "All fields are required.")
     
-    feedback_list = Feedback.objects.all().order_by('-created_at')
+    feedback_list = Feedback.objects.all().order_by('-submitted_at')
 
     return render(request, "home/feedback.html", {
         "restaurant_name": restaurant_name,
