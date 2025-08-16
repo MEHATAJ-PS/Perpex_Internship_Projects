@@ -20,15 +20,276 @@
 </header>
 
 <main>
-    <section class="container">
-        <h2>Contact Us</h2>
-        <p><strong>Phone:</strong> {{ contact.phone }}</p>
-        <p><strong>Email:</strong> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
-        <p><strong>Address:</strong> {{ contact.address }}</p>
-        <p><strong>Opening Hours:</strong> {{ contact.hours }}</p>
+    
+    <section class="container contact-info-section">
+        <h2>Get In touch</h2>
+       <div class="contact-info-grid">
+        <div class="contact-card">
+            <h3>Phone</h3>
+            <p><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></p>
+        </div>
+        <div class="contact-card">
+            <h3>Email</h3>
+            <p><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+        </div>
+        <div class="contact-card">
+            <h3>Address</h3>
+            <p>{{ contact.address }}</p>
+        </div>
+        <div class="contact-card">
+            <h3>Hours</h3>
+            <p>{{ contact.hours }}</p>
+        </div>
+    </div>
+    </section>
+
+    <section class="container contact-form-section">
+        <div class="form-header">
+            <h2>Send Us a Message</h2>
+            <p>Have a question or want to make a reservation? We'd love to hear from you!</p>
+        </div>
+
+        <form id="contactForm" class="contact-form" method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    <div class="error-message" id="nameError">Name is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <div class="error-message" id="emailError">Valid email is required</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject">
+                        <option value="">Select a subject</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="reservation">Reservation</option>
+                        <option value="catering">Catering Services</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="partnership">Business Partnership</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help you..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span class="btn-text">Send Message</span>
+            </button>
+        </form>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+            <h3>Thank You!</h3>
+            <p>Your message has been sent successfully. We'll get back to you within 24 hours.</p>
+        </div>
     </section>
 </main>
 
 {% include "home/footer.html" %}
+
+<script>
+// Contact Form validation JavaScript
+class ContactFormValidator {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.fields = {
+            name: document.getElementById('name'),
+            email: document.getElementById('email'),
+            phone: document.getElementById('phone'),
+            subject: document.getElementById('subject'),
+            message: document.getElementById('message')
+        };
+        this.errors = {
+            name: document.getElementById('nameError'),
+            email: document.getElementById('emailError')
+        };
+        this.successMessage = document.getElementById('successMessage');
+
+        this.init();
+    }
+    init() {
+        // Form submission handler
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        
+        // Real-time validation
+        this.fields.name.addEventListener('input', () => this.validateName());
+        this.fields.email.addEventListener('input', () => this.validateEmail());
+
+        // Clear errors on focus
+        this.fields.name.addEventListener('focus', () => this.clearError('name'));
+        this.fields.email.addEventListener('focus', () => this.clearError('email'));
+    }
+
+    validateName() {
+        const name = this.fields.name.value.trim();
+
+        if (name === '') {
+            this.showError('name', 'Name is required');
+            return false;
+        } else if (name.length < 2) {
+            this.showError('name', 'Name must be at least 2 characters');
+            return false;
+        }else if (!/^[a-zA-Z\s'-]+$/.test(name)) {
+            this.showError('name', 'Name can only contain letters, spaces, hyphens, and apostrophes');
+            return false;
+        } else {
+            this.showSuccess('name');
+            return true;
+        }
+    }
+
+    validateEmail() {
+        const email = this.fields.email.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email === '') {
+            this.showError('email', 'Email is required');
+            return false;
+        } else if (!emailRegex.test(email)) {
+            this.showError('email', 'Please enter a valid email address');
+            return false;
+        } else {
+            this.showSuccess('email');
+            return true;
+        }
+    }
+
+    showError(field, message) {
+        this.fields[field].classList.add('error');
+        this.fields[field].classList.remove('success');
+        if (this.errors[field]) {
+            this.errors[field].textContent = message;
+            this.errors[field].classList.add('show');
+        }
+    }
+
+    showSuccess(field) {
+        this.fields[field].classList.remove('error');
+        this.fields[field].classList.add('success');
+        if (this.errors[field]) {
+            this.errors[field].classList.remove('show');
+        }
+    }
+
+    clearError(field) {
+        this.fields[field].classList.remove('error');
+        if (this.errors[field]) {
+            this.errors[field].classList.remove('show');
+        }
+    }
+
+    validateForm() {
+        const isNameValid = this.validateName();
+        const isEmailValid = this.validateEmail();
+
+        return isNameValid && isEmailValid;
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        if (this.validateForm()) {
+            // If validation passes, submit the form normally to Django
+            this.submitFormToDjango();
+        } else {
+            // Focus on first error field
+            const firstErrorField = this.form.querySelector('.error');
+            if (firstErrorField) {
+                firstErrorField.focus();
+            }
+        }
+    }
+
+    submitFormToDjango() {
+        const submitBtn = this.form.querySelector('.submit-btn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.textContent = 'Sending...';
+        submitBtn.classList.add('loading');
+
+        // Create FormData object with all form data
+        const formData = new FormData(this.form);
+
+        // Submit to Django backend
+        fetch(this.form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok');
+        })
+        .then(data => {
+            //show success message
+            this.form.style.display = 'none';
+            this.successMessage.classList.add('show');
+
+            // Reset form after 5 seconds
+            setTimeout(() => {
+                this.form.style.display = 'block';
+                this.successMessage.classList.remove('show');
+                this.form.reset();
+                this.clearAllErrors();
+
+                submitBtn.disabled = false;
+                btnText.textContent = originalText;
+                submitBtn.classList.remove('loading');
+            }, 5000);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+
+            // Reset button on error
+            submitBtn.disabled = false;
+            btnText.textContent = originalText;
+            submitBtn.classList.remove('loading');
+
+            // Show error message
+            alert('There was an error sending your message. Please try again.');
+        });
+    }
+
+    clearAllErrors() {
+        Object.keys(this.fields).forEach(field => {
+            this.fields[field].classList.remove('error', 'success');
+        });
+        Object.keys(this.errors).forEach(error => {
+            this.errors[error].classList.remove('show');
+        });
+    }
+}
+
+// Initialize form validator when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new ContactFormValidator();
+});
+</script>
+
 </body>
 </html>
