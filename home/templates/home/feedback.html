@@ -29,8 +29,8 @@
             <ul class="feedback-list">
                 {% for feedback in feedback_list %}
                     <li class="feedback-item">
-                        <strong>{{ feedback.name }}</strong> ({{ feedback.email }})</br>
-                        <span class="message">{{ feedback.message }}</span><br>
+                        <strong>{{ feedback.name }}</strong> ({{ feedback.email }})<br>
+                        <span class="message">{{ feedback.comments }}</span><br>
                         <small>{{ feedback.submitted_at }}</small>
                     </li>
                 {% endfor %}
