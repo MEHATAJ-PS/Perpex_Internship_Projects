@@ -4,6 +4,7 @@ from .models import RestaurantInfo, Feedback
 from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
+from .forms import FeedbackForm
 
 def menu_view(request):
     """
@@ -105,20 +106,22 @@ def feedback_view(request):
     restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
 
     if request.method == "POST":
-        name = request.POST.get("name", "").strip()
-        email = request.POST.get("email", "").strip()
-        comments = request.POST.get("message", "").strip()
+        form = FeedbackForm(request.POST)
 
-        if name and email and comments:
-            Feedback.objects.create(name=name, email=email, comments=comments)
+        if form.is_valid():
+            form.save()
             messages.success(request, "Thank you! Your feedback has been submitted.")
             return redirect("feedback") # Redirect to avoid form resubmission
         else:
-            messages.error(request, "All fields are required.")
+            messages.error(request, "Please correct the errors below.")
     
+    else:
+        form = FeedbackForm()
+
     feedback_list = Feedback.objects.all().order_by('-submitted_at')
 
     return render(request, "home/feedback.html", {
         "restaurant_name": restaurant_name,
-        "feedback_list": feedback_list
+        "feedback_list": feedback_list,
+        "form": form
     })
