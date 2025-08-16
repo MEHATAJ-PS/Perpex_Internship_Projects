@@ -227,12 +227,12 @@ body {
 }
 
 .alert.error {
-    background-color: : #f8d7da;
+    background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
 
-@media (max-width; 768px) {
+@media (max-width: 768px) {
     .feedback-form,
     .feedback-list {
         max-width: 100%;
