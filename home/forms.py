@@ -2,7 +2,7 @@ from django import forms
 from .models import Feedback
 
 
-class feedbackForm(forms.ModelForm):
+class FeedbackForm(forms.ModelForm):
     """
     Form for users to submit feedback.
     """
