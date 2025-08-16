@@ -599,9 +599,27 @@ body {
     outline-offset: 2px;
 }
 
+/* ===== Footer Styles ===== */
+.site-footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #f8f8f8;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
 
+.site-footer p {
+    margin: 5px 0;
+}
 
-
+.opening-hours {
+    margin-top: 8px;
+    line-height: 1.6;
+    font-size: 13px;
+    color: #555;
+}
 
 
 
