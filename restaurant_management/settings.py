@@ -129,6 +129,6 @@ STATICFILES_DIRS = [BASE_DIR/ "static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-RESTAURANT_PHONE_NUMBER = "+1 (555) 123-4567"
+
 
 
