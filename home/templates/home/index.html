@@ -16,7 +16,8 @@
             <img src="https://cdn-icons-png.flaticon.com/512/685/685352.png"
                  alt="Restaurant Logo"
                  class="logo-img">
-            <h1>{{ restaurant_name }}</h1>
+                <!-- Restaurant Name -->
+            <h1 class="restaurant-name">{{ restaurant_name }}</h1>
         </div>
 
         <nav aria-label="Main Navigation">
@@ -30,7 +31,7 @@
     <main role="main">
         <!-- Hero Section -->
         <section class="hero">
-            <h2>Welcome to {{ restaurant_name }}</h2>
+            <h2>Welcome to <span class="highlight">{{ restaurant_name }}</span></h2>
             <p>Delicious food, cozy atmosphere, and great service - all in one place.</p>
             <p>Call us at: <strong>{{ phone_number }}</strong></p>
             <a href="{% url 'menu' %}" class="btn-custom">View Menu</a>
