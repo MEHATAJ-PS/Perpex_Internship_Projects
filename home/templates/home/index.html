@@ -51,6 +51,52 @@
             <h3>Our Specialties</h3>
             <p>We serve the best dishes prepared with fresh ingredients and love.</p>
         </section>
+        
+
+        <!-- Contact Us Form Section -->
+        <section class="contact-form-section">
+            <div class="container">
+                <h3>Contact Us</h3>
+                <p>Fill out form below to get in touch with us.</p>
+
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                            <div class="form-error">{{ form.name.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="form-error">{{ form.name.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="form-error">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn-custom">Submit</button>
+                </form>
+
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </section>
 
         <!-- Location & Contact Section -->
         <section class="location bg-light py-5">
