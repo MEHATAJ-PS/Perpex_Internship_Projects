@@ -4,7 +4,8 @@ from .models import Feedback
 
 class FeedbackForm(forms.ModelForm):
     """
-    Form for users to submit feedback.
+    Form for users to submit feedback (name, email, and comments).
+    In
     """
     class Meta:
         model = Feedback
