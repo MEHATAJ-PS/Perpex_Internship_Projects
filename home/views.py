@@ -67,10 +67,10 @@ def contact_view(request):
     Render the Contact Us page with hardcoded contact info.
     """
     contact_info = {
-        "phone": "+1 (555) 123-4567",
-        "email": "info@myrestaurant.com",
-        "address": "123 Food Street, Flavor Town, USA",
-        "hours": "Mon-Sat: 10am - 10pm, Sun: Closed"
+        "phone": "+91 98765 43210",
+        "email": "info@delishrestaurant.com",
+        "address": "MG Road, Bangalore, India",
+        "hours": "Mon-Sun: 10am - 10pm"
     }
 
     
