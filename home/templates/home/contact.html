@@ -16,31 +16,33 @@
         <a href="{% url 'menu' %}" aria-label="View Menu">Menu</a>
         <a href="{% url 'about' %}" aria-label="About Us">About</a>
         <a href="{% url 'contact' %}" aria-label="Contact Us">Contact</a>
+        <a href="{% url 'reservations' %}">Reservations</a>
+        <a href="{% url 'feedback' %}">Feedback</a>
     </nav>
 </header>
 
 <main>
     
     <section class="container contact-info-section">
-        <h2>Get In touch</h2>
-       <div class="contact-info-grid">
-        <div class="contact-card">
-            <h3>Phone</h3>
-            <p><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></p>
+        <h2>Get In Touch</h2>
+        <div class="contact-info-grid">
+            <div class="contact-card">
+                <h3>Phone</h3>
+                <p><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></p>
+            </div>
+            <div class="contact-card">
+                <h3>Email</h3>
+                <p><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+            </div>
+            <div class="contact-card">
+                <h3>Address</h3>
+                <p>{{ contact.address }}</p>
+            </div>
+            <div class="contact-card">
+                <h3>Hours</h3>
+                <p>{{ contact.hours }}</p>
+            </div>
         </div>
-        <div class="contact-card">
-            <h3>Email</h3>
-            <p><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
-        </div>
-        <div class="contact-card">
-            <h3>Address</h3>
-            <p>{{ contact.address }}</p>
-        </div>
-        <div class="contact-card">
-            <h3>Hours</h3>
-            <p>{{ contact.hours }}</p>
-        </div>
-    </div>
     </section>
 
     <section class="container contact-form-section">
