@@ -52,6 +52,7 @@ def homepage(request):
     return render(request, 'home/index.html', {
         'restaurant_name': restaurant_name,
         'phone_number': phone_number,
+        'contact_info': contact_info
     })
 
 def about_view(request):
