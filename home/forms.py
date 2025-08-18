@@ -1,5 +1,5 @@
 from django import forms
-from .models import Feedback
+from .models import Feedback, Contact
 
 
 class FeedbackForm(forms.ModelForm):
@@ -33,3 +33,26 @@ class FeedbackForm(forms.ModelForm):
         help_texts = {
             'comments': 'Please be specific and constructive in your feedback.',
         }
+
+class ContactForm(forms.ModelForm):
+    """
+    Basic Contact Us form with name and email.
+    """
+    class Meta:
+        model = Contact
+        fields = ['name', 'email']
+        labels = {
+            'name': 'Full Name',
+            'email': 'Email Address',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your full name'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your email address'
+            }),
+        }
+
