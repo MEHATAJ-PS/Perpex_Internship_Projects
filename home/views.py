@@ -49,6 +49,13 @@ def homepage(request):
     restaurant_name = restaurant_info.name if restaurant_info else "My Restaurant"
     phone_number = getattr(settings, "RESTAURANT_PHONE_NUMBER", "N/A")
 
+    contact_info = {
+        "phone": "+91 98765 43210",
+        "email": "info@delishrestaurant.com",
+        "address": "MG Road, Bangalore, India",
+        "hours": "Mon-Sun: 10am - 10pm"
+    }
+
     return render(request, 'home/index.html', {
         'restaurant_name': restaurant_name,
         'phone_number': phone_number,
