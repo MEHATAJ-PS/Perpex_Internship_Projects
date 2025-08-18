@@ -5,13 +5,31 @@ from .models import Feedback
 class FeedbackForm(forms.ModelForm):
     """
     Form for users to submit feedback (name, email, and comments).
-    In
+    Includes Bootstrap-friendly widgets and placeholders.
     """
     class Meta:
         model = Feedback
         fields = ['name', 'email', 'comments']
+        labels = {
+            'name': 'Full Name',
+            'email': 'Email Address',
+            'comments': 'Your Feedback / Suggestions',
+        }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
-            'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Feedback', 'rows': 5}),
+            'name': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Enter your full name'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Enter your email address'
+            }),
+            'comments': forms.Textarea(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Write your feedback or suggestions here...', 
+                'rows': 5
+            }),
+        }
+        help_texts = {
+            'comments': 'Please be specific and constructive in your feedback.',
         }
