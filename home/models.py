@@ -82,3 +82,21 @@ class Feedback(models.Model):
         verbose_name = "Feedback"
         verbose_name_plural = "Feedback"
         ordering = ['-submitted_at']
+
+
+class RestaurantLocation(models.Model):
+    """
+    Stores restaurant location details.
+    """
+    address = models.CharField(max_length=255, verbose_name="Street Address")
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    pincode = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"{self.address}, {self.city}, {self.state} - {self.zip_code}"
+    
+    class Meta:
+        verbose_name = "Restaurant Location"
+        verbose_name_plural = "Restaurant Locations"
+        ordering = ['city']
