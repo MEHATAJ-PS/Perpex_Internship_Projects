@@ -1,5 +1,5 @@
 from django import forms
-from .models import Feedback, Contact
+from .models import Feedback, Contact, ContactSubmission
 
 
 class FeedbackForm(forms.ModelForm):
@@ -41,6 +41,30 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['name', 'email']
+        labels = {
+            'name': 'Full Name',
+            'email': 'Email Address',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your full name'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your email address'
+            }),
+        }
+
+
+class ContactSubmissionForm(forms.ModelForm):
+    """
+    Form for task: Simple Contact Form Submission
+    Allows user to submit only name and email.
+    """
+    class Meta:
+        model = ContactSubmission
+        fields =['name', 'email']
         labels = {
             'name': 'Full Name',
             'email': 'Email Address',
