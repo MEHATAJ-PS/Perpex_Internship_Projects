@@ -43,3 +43,11 @@ class RestaurantLocationAdmin(admin.ModelAdmin):
     ordering = ('city',)
 
 
+@admin.register(ContactSubmission):
+class ContactSubmissionAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for ContactSubmission model.
+    """
+    list_display = ('name', 'email', 'submitted_at')
+    search_fields = ('name', 'email')
+    ordering = ('-submitted_at',)
