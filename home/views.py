@@ -1,10 +1,10 @@
 import requests
 from django.shortcuts import render, redirect
-from .models import RestaurantInfo, Feedback
+from .models import RestaurantInfo, Feedback, ContactSubmission
 from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
-from .forms import FeedbackForm
+from .forms import FeedbackForm, ContactSubmissionForm
 
 def menu_view(request):
     """
@@ -71,9 +71,20 @@ def contact_view(request):
     """
     Render the Contact Us page with hardcoded contact info.
     """
-
     restaurant_name = getattr(RestaurantInfo.objects.first(), "name", "My Restaurant")
     
+    if request.method == "POST":
+        form = ContactSubmissionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Thank you for contacting us! We'll get back to you soon.")
+            return redirect("contact")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ContactSubmissionForm()
+
+
     contact_info = {
         "phone": "+91 98765 43210",
         "email": "info@delishrestaurant.com",
@@ -85,6 +96,7 @@ def contact_view(request):
     return render(request, "home/contact.html", {
         "contact": contact_info,
         "restaurant_name": restaurant_name,
+        "form": form
     })
 
 def reservations_view(request):
