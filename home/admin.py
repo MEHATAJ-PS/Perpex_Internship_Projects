@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RestaurantInfo, Feedback, Contact, RestaurantLocation
+from .models import RestaurantInfo, Feedback, Contact, RestaurantLocation, ContactSubmission
 
 @admin.register(RestaurantInfo)
 class RestaurantInfoAdmin(admin.ModelAdmin):
@@ -41,3 +41,5 @@ class RestaurantLocationAdmin(admin.ModelAdmin):
     search_fields = ('address', 'city', 'state', 'pincode')
     list_filter = ('city', 'state')
     ordering = ('city',)
+
+
