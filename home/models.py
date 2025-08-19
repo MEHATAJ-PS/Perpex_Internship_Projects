@@ -53,6 +53,35 @@ class Contact(models.Model):
         verbose_name_plural = "Contact Submissions"
         ordering = ['-submitted_at']
 
+
+class SimpleContact(models.Model):
+    """
+    Stores very basic contact form submissions with just name and email.
+    (task Requirement: Simple Contact Form Submission)
+    """
+    name = models.charField(
+        max_length=100,
+        verbose_name="Your Name",
+        help_text="Enter your email address."
+    )
+    email = models.EmailField(
+        verbose_name="Email Address",
+        help_text="Enter your email address."
+    )
+    submitted_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Submitted At"
+    )
+
+    def __str__(self):
+        return f"{self.name} ({self.email})"
+
+    class Meta:
+        verbose_name = "Simple Contact"
+        verbose_name_plural = "Simple Contacts"
+        ordering = ['-submitted_at']
+
+
 class Feedback(models.Model):
     """
     Stores customer feedback submissions.
@@ -94,7 +123,7 @@ class RestaurantLocation(models.Model):
     pincode = models.CharField(max_length=10)
 
     def __str__(self):
-        return f"{self.address}, {self.city}, {self.state} - {self.zip_code}"
+        return f"{self.address}, {self.city}, {self.state} - {self.pincode}"
     
     class Meta:
         verbose_name = "Restaurant Location"
