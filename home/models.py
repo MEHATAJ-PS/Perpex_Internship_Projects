@@ -2,7 +2,7 @@ from django.db import models
 
 class RestaurantInfo(models.Model):
     """
-    Stores basic restaurant information.
+    Stores basic restaurant information including address.
     """
     name = models.CharField(
         max_length=200,
@@ -15,6 +15,11 @@ class RestaurantInfo(models.Model):
         null=True,
         verbose_name="Phone Number",
         help_text="Enter the restaurant's contact number."
+    )
+    address = models.CharField(
+        max_length=255,
+        verbose_name="Restaurant Address",
+        help_text="Enter the full address of the restaurant."
     )
 
     def __str__(self):
