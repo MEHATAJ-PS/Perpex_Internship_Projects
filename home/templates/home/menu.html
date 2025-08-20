@@ -30,8 +30,8 @@
                         <div class="col-lg-6 col-md-6 mb-4">
                             <div class="menu-card">
 
-                                {% if item.image_url %}
-                                    <img src="{{ item.image_url }}" alt="{{ item.item_name }}"
+                                {% if item.image %}
+                                    <img src="{{ item.image.url }}" alt="{{ item.item_name }}"
                                         class="img-fluid mb-3"
                                         style="max-height: 200px; object-fit: cover; border-radius: 8px;">
                                 {% endif %}
