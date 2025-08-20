@@ -29,9 +29,16 @@
                     {% for item in menu %}
                         <div class="col-lg-6 col-md-6 mb-4">
                             <div class="menu-card">
+
+                                {% if item.image_url %}
+                                    <img src="{{ item.image_url }}" alt="{{ item.item_name }}"
+                                        class="img-fluid mb-3"
+                                        style="max-height: 200px; object-fit: cover; border-radius: 8px;">
+                                {% endif %}
+
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h3 class="mb-0" style="color: #333; font-weight: 600;">{{ item.name }}</h3>
-                                    <span class="price">&#8377;{{ item.price }}</span>
+                                    <h3 class="mb-0" style="color: #333; font-weight: 600;">{{ item.item_name }}</h3>
+                                    <span class="price">&#8377;{{ item.item_price }}</span>
                                 </div>
                                 {% if item.description %}
                                     <p class="mb-0" style="color: #666; line-height: 1.6;">{{ item.description }}</p>
