@@ -41,16 +41,22 @@ def custom_404_view(request, exception):
 
 def homepage(request):
     """
-    Render the homepage with basic restaurant info.
+    Render the homepage with basic restaurant info and location from DB.
     """
 
     restaurant_name = getattr(RestaurantInfo.objects.first(), "name", "My Restaurant")
     phone_number = getattr(settings, "RESTAURANT_PHONE_NUMBER", "+91 98765 43210")
 
+    location = RestaurantLocation.objects.first()
+    if location:
+        full_address = f"{location.address}, {location.city}, {location.state} - {location.pincode}"
+    else:
+        full_address = "Address not available"
+
     contact_info = {
         "phone": phone_number,
         "email": getattr(settings, "RESTAURANT_CONTACT_EMAIL", "info@delishrestaurant.com"),
-        "address": "MG Road, Bangalore, India",
+        "address": full_address,
         "hours": "Mon-Sun: 10am - 10pm"
     }
 
