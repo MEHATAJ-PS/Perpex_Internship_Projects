@@ -1,6 +1,6 @@
 import requests
 from django.shortcuts import render, redirect
-from .models import RestaurantInfo, Feedback, ContactSubmission
+from .models import RestaurantInfo, RestaurantInfo, Feedback, ContactSubmission
 from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
