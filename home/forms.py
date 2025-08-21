@@ -79,4 +79,8 @@ class ContactSubmissionForm(forms.ModelForm):
                 'placeholder': 'Enter your email address'
             }),
         }
+        help_texts = {
+            'name': 'Please enter your full name.',
+            'email': 'we will contact you at this email address,',
+        }
 
