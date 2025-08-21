@@ -40,9 +40,9 @@
 
         <!-- Search Bar Section -->
         <section class="search-bar">
-            <form method="get" action="#">
+            <form method="get" action="{% url 'menu' %}">
                 <input type="text" name="q" placeholder="Search menu items..." aria-label="Search Menu Items">
-                <button type="submit">Search</button>
+                <button type="submit" aria-label="Search menu items">Search</button>
             </form>
         </section>
         
@@ -73,14 +73,6 @@
                         {{ form.email.label_tag }}
                         {{ form.email }}
                         {% if form.email.errors %}
-                            <div class="form-error">{{ form.name.errors }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.email.label_tag }}
-                        {{ form.email }}
-                        {% if form.email.errors %}
                             <div class="form-error">{{ form.email.errors }}</div>
                         {% endif %}
                     </div>
@@ -102,7 +94,7 @@
         <section class="location bg-light py-5">
             <div class="container text-center">
                 <h2 class="mb-4" style="color: #8b0000; font-weight: 600;">Find Us</h2>
-                <p class="lead mb-2">{{ contact_info.address }}</p>
+                <p class="lead mb-2">{{ contact_info.address|default:"Address not available" }}</p>
                 <p>{{ contact_info.phone }}</p>
                 <p>{{ contact_info.email }}</p>
                 <p>{{ contact_info.hours }}</p>
