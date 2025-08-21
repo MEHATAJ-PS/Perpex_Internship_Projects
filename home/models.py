@@ -64,7 +64,7 @@ class SimpleContact(models.Model):
     Stores very basic contact form submissions with just name and email.
     (task Requirement: Simple Contact Form Submission)
     """
-    name = models.charField(
+    name = models.CharField(
         max_length=100,
         verbose_name="Your Name",
         help_text="Enter your email address."
