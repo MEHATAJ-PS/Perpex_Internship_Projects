@@ -28,11 +28,16 @@ def menu_view(request):
         print(f"[Error] Failed to fetch menu items: {e}")
         menu_items = []
 
-    
+    # Search filter
+    query = request.GET.get("q", "").strip()
+    if query:
+        menu_items = [item for item in menu_items if query.lower() in item["name"].lower()]
+
     info = get_restaurant_info()
     return render(request, 'home/menu.html', {
         'menu': menu_items,
-        'restaurant_name': info["name"]
+        'restaurant_name': info["name"],
+        'search_query': query
     })
 
 
