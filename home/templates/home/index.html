@@ -99,6 +99,18 @@
                 <p>{{ contact_info.email }}</p>
                 <p>{{ contact_info.hours }}</p>
 
+                <!-- Opening Hours -->
+                <h3 class="mt-4" style="color: #8b0000;">Opening Hours</h3>
+                {% if contact_info.hours %}
+                    <ul class="list-unstyled">
+                        {% for day, time in contact_info.hours.items %}
+                            <li><strong>{{ day }}:</strong> {{ time }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Opening hours not available.</p>
+                {% endif %}
+
                 <!-- Google Map Embed -->
                 <div class="map-container">
                     <iframe
