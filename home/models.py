@@ -2,7 +2,7 @@ from django.db import models
 
 class RestaurantInfo(models.Model):
     """
-    Stores basic restaurant information including address.
+    Stores basic restaurant information including address and opening hours.
     """
     name = models.CharField(
         max_length=200,
@@ -20,6 +20,11 @@ class RestaurantInfo(models.Model):
         max_length=255,
         verbose_name="Restaurant Address",
         help_text="Enter the full address of the restaurant."
+    )
+    opening_hours = models.JSONField(
+        default=dict,
+        verbose_name="Opening Hours",
+        help_text="Enter opening hours in the format: {'Monday': '9 AM - 10 PM', ...}"
     )
 
     def __str__(self):
