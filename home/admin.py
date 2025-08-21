@@ -43,7 +43,7 @@ class RestaurantLocationAdmin(admin.ModelAdmin):
     ordering = ('city',)
 
 
-@admin.register(ContactSubmission):
+@admin.register(ContactSubmission)
 class ContactSubmissionAdmin(admin.ModelAdmin):
     """
     Admin configuration for ContactSubmission model.
