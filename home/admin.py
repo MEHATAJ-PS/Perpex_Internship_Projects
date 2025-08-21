@@ -47,6 +47,7 @@ class RestaurantLocationAdmin(admin.ModelAdmin):
 class ContactSubmissionAdmin(admin.ModelAdmin):
     """
     Admin configuration for ContactSubmission model.
+    This controls how contact form submissions are displayed and managed in the admin panel.
     """
     list_display = ('name', 'email', 'submitted_at')
     search_fields = ('name', 'email')
