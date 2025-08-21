@@ -50,7 +50,7 @@ def homepage(request):
         "phone": info["phone"],
         "email": getattr(settings, "RESTAURANT_CONTACT_EMAIL", "info@delishrestaurant.com"),
         "address": info["address"],
-        "hours": "Mon-Sun: 10am - 10pm"
+        "hours": restaurant.opening_hours if restaurant else {}
     }
     return render(request, 'home/index.html', {
         'restaurant_name': info["name"],
