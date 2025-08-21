@@ -30,13 +30,16 @@ def menu_view(request):
 
     # Search filter
     query = request.GET.get("q", "").strip()
-    if query:
-        menu_items = [item for item in menu_items if query.lower() in item["name"].lower()]
+    if isinstance(menu_items, list) and query:
+        menu_items = [
+            item for item in menu_items 
+            if query.lower() in item("name", "").lower()
+        ]
 
     info = get_restaurant_info()
     return render(request, 'home/menu.html', {
         'menu': menu_items,
-        'restaurant_name': info["name"],
+        'restaurant_name': info.get("name", "Restaurant"),
         'search_query': query
     })
 
