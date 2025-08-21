@@ -41,16 +41,16 @@ def custom_404_view(request, exception):
 
 def homepage(request):
     """
-    Render the homepage with basic restaurant info and location from DB.
+    Render the homepage with basic restaurant info and address from DB.
     """
-
-    restaurant_name = getattr(RestaurantInfo.objects.first(), "name", "My Restaurant")
-    phone_number = getattr(settings, "RESTAURANT_PHONE_NUMBER", "+91 98765 43210")
-
-    location = RestaurantLocation.objects.first()
-    if location:
-        full_address = f"{location.address}, {location.city}, {location.state} - {location.pincode}"
+    restaurant = RestaurantInfo.objects.first()
+    if restaurant:
+        restaurant_name = restaurant.name
+        phone_number = restaurant.phone_number or "+91 98765 43210"
+        full_address = restaurant.address
     else:
+        restaurant_name = "MY Restaurant"
+        phone_number = "+91 98765 43210"
         full_address = "Address not available"
 
     contact_info = {
