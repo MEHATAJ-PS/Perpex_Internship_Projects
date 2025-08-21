@@ -16,6 +16,15 @@
                 <p class="lead">Delicious Food, Memorable Moments</p>
             </div>
 
+            <!-- Search Bar -->
+            <form method="get" action="{% url 'menu' %}" class="mb-4">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search menu items..."
+                           value="{{ search_query|default:'' }}">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+            
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
