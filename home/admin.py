@@ -6,7 +6,7 @@ class RestaurantInfoAdmin(admin.ModelAdmin):
     """
     Admin configuration for RestaurantInfo model.
     """
-    list_display = ('name', 'phone_number') # Columns shown in admin list view
+    list_display = ('name', 'phone_number', 'opening_hours') # Columns shown in admin list view
     search_fields = ('name',) # Search bar for restaurant names
 
 
