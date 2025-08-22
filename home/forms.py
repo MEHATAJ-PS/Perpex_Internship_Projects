@@ -60,14 +60,15 @@ class ContactForm(forms.ModelForm):
 class ContactSubmissionForm(forms.ModelForm):
     """
     Form for task: Simple Contact Form Submission
-    Allows user to submit only name and email.
+    Allows user to submit name, email, and message.
     """
     class Meta:
         model = ContactSubmission
-        fields =['name', 'email']
+        fields =['name', 'email', 'message']
         labels = {
             'name': 'Full Name',
             'email': 'Email Address',
+            'message': 'Your Message',
         }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -78,9 +79,16 @@ class ContactSubmissionForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter your email address'
             }),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Write your message here...',
+                'rows': 5
+            }),
         }
         help_texts = {
             'name': 'Please enter your full name.',
-            'email': 'we will contact you at this email address,',
+            'email': 'we will contact you at this email address.',
+            'message': 'Please describe your query or feedback clearly.',
         }
+
 
