@@ -27,6 +27,7 @@ urlpatterns = [
     path('api/products/',include('products.urls')),
     path('api/orders/',include('orders.urls')),
     path("", include("home.urls", namespace="home")),
+    path("api/users/", include("users.urls")),
 ]
 
 handler404 = home_views.custom_404_view
