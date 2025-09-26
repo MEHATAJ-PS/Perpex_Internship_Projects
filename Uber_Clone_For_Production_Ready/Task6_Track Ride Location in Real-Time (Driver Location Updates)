@@ -1,0 +1,111 @@
+# -------------------------------
+# drivers/models.py  (extend Driver model)
+# -------------------------------
+from django.db import models
+from django.contrib.auth.models import User
+
+class Driver(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="driver_profile")
+    phone_number = models.CharField(max_length=15)
+    vehicle_make = models.CharField(max_length=50)
+    vehicle_model = models.CharField(max_length=50)
+    license_plate = models.CharField(max_length=20)
+    driver_license_number = models.CharField(max_length=50)
+    is_available = models.BooleanField(default=True)
+
+    # NEW FIELDS for Task 6
+    current_latitude = models.FloatField(null=True, blank=True)
+    current_longitude = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+        
+
+# -------------------------------
+# rides/serializers.py
+# -------------------------------
+from rest_framework import serializers
+from .models import Ride
+from drivers.models import Driver
+
+# Existing ride serializers remain unchanged...
+
+class DriverLocationUpdateSerializer(serializers.Serializer):
+    latitude = serializers.FloatField()
+    longitude = serializers.FloatField()
+
+
+class DriverLocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Driver
+        fields = ["current_latitude", "current_longitude"]
+
+
+# -------------------------------
+# rides/views.py
+# -------------------------------
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from .models import Ride
+from drivers.models import Driver
+from .serializers import DriverLocationUpdateSerializer, DriverLocationSerializer
+
+
+# Driver updates their live location
+class UpdateDriverLocationView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            driver = request.user.driver_profile
+        except Driver.DoesNotExist:
+            return Response({"error": "Only drivers can update location"}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = DriverLocationUpdateSerializer(data=request.data)
+        if serializer.is_valid():
+            driver.current_latitude = serializer.validated_data["latitude"]
+            driver.current_longitude = serializer.validated_data["longitude"]
+            driver.save()
+            return Response({"message": "Location updated successfully"})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Rider tracks driver location for an ongoing ride
+class TrackRideView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, ride_id):
+        try:
+            ride = Ride.objects.get(id=ride_id)
+        except Ride.DoesNotExist:
+            return Response({"error": "Ride not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Rider or driver must be part of the ride
+        if request.user != ride.rider.user and (ride.driver is None or request.user != ride.driver.user):
+            return Response({"error": "Not authorized to track this ride"}, status=status.HTTP_403_FORBIDDEN)
+
+        if ride.status != "ONGOING":
+            return Response({"error": "Ride is not active for tracking"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not ride.driver or not ride.driver.current_latitude or not ride.driver.current_longitude:
+            return Response({"error": "Driver location not available yet"}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = DriverLocationSerializer(ride.driver)
+        return Response(serializer.data)
+
+
+# -------------------------------
+# rides/urls.py
+# -------------------------------
+from django.urls import path
+from .views import UpdateDriverLocationView, TrackRideView
+
+urlpatterns = [
+    # Task 5 endpoints (request, available, accept) already here...
+
+    # Task 6 endpoints
+    path("ride/update-location/", UpdateDriverLocationView.as_view(), name="update-driver-location"),
+    path("ride/track/<int:ride_id>/", TrackRideView.as_view(), name="track-ride"),
+]
