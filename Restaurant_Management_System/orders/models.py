@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from products.models import Item
 from decimal import Decimal
+from .utils import generate_unique_order_id  # we'll create this
 
 
 class Order(models.Model):
@@ -13,9 +14,16 @@ class Order(models.Model):
     ]
 
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    unique_id = models.CharField(max_length=12, unique=True, editable=False)  # NEW
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        # Assign unique_id only on creation
+        if not self.unique_id:
+            self.unique_id = generate_unique_order_id()
+        super().save(*args, **kwargs)
 
     def calculate_total(self):
         """Calculate total based on related OrderItems"""
@@ -26,7 +34,7 @@ class Order(models.Model):
         return total
 
     def __str__(self):
-        return f"Order #{self.id} by {self.customer.username}"
+        return f"Order {self.unique_id} by {self.customer.username}"
 
 
 class OrderItem(models.Model):
@@ -37,3 +45,4 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.item.name} (x{self.quantity})"
+
