@@ -1,21 +1,16 @@
-import string
 import secrets
-from .models import Coupon  # adjust import if Coupon is in another app
+import string
+from .models import Order
 
 
-def generate_coupon_code(length: int = 10) -> str:
+def generate_unique_order_id(length: int = 8) -> str:
     """
-    Generate a unique alphanumeric coupon code.
-
-    Args:
-        length (int, optional): Length of the coupon code. Defaults to 10.
-
-    Returns:
-        str: A unique coupon code guaranteed not to collide with existing codes.
+    Generate a unique alphanumeric order ID.
+    Ensures no collision with existing IDs in the DB.
     """
-    characters = string.ascii_uppercase + string.digits  # e.g. "AB12CD34"
-
+    characters = string.ascii_uppercase + string.digits
     while True:
         code = ''.join(secrets.choice(characters) for _ in range(length))
-        if not Coupon.objects.filter(code=code).exists():
+        if not Order.objects.filter(unique_id=code).exists():
             return code
+
