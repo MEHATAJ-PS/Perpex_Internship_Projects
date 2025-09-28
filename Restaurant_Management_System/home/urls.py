@@ -10,4 +10,7 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact'),
     path('reservations/', views.reservations_view, name='reservations'),
     path('feedback/', views.feedback_view, name='feedback'),
+
+    # DRF API endpoint for simple contact form
+    path('api/contact/', views.ContactFormSubmissionAPI.as_view(), name='api-contact-form'),
 ]
